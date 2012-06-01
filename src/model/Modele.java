@@ -16,6 +16,7 @@ public class Modele implements Observable {
 	private ArrayList<Observer> tabObservers;
 
 	public Modele(int n){
+		this.tabObservers=new ArrayList<Observer>();
 		this.tailleTab=n;
 		this.tabBool=new boolean[n][n];
 		this.enMarche=false;
@@ -60,9 +61,8 @@ public class Modele implements Observable {
 				 init();
 				 notifyObserver();
 			 }
-			 Thread thread=new Thread();
 			 try {
-				thread.wait(t);
+				Thread.sleep(t);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -72,7 +72,7 @@ public class Modele implements Observable {
 	
 	public void init() {
 		for (int i=0;i<this.tailleTab;i++){
-			for (int j=0;i<this.tailleTab;j++){
+			for (int j=0;j<this.tailleTab;j++){
 				Random rand=new Random();
 				this.tabBool[i][j]=rand.nextBoolean();
 			}
@@ -87,12 +87,10 @@ public class Modele implements Observable {
 		this.enMarche=true;
 	}
 
-	@Override
 	public void addObserver(Observer obs) {
 		tabObservers.add(obs);	
 	}
 
-	@Override
 	public void removeObserver(Observer obs) {
 		tabObservers.remove(obs);
 	}
