@@ -2,8 +2,9 @@ package model;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Observer;
 import java.util.Random;
+
+import viewController.Observer;
 
 
 public class Modele implements Observable {

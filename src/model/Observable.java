@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Observer;
+import viewController.Observer;
 
 public interface Observable {
 
