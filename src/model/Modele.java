@@ -51,7 +51,7 @@ public class Modele extends Observable {
 		this.enMarche=false;
 	}
 	
-	public void active(){
+	public void activ(){
 		this.enMarche=true;
 	}
 }
