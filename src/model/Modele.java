@@ -98,12 +98,13 @@ public class Modele implements Observable {
 	@Override
 	public void removeObserver(Observer obs) {
 		tabObservers.remove(obs);
-		
 	}
 
 	@Override
 	public void notifyObserver() {
-		tabObservers.Notify();
+		for(Observer tab : tabObservers){
+			tab.Notify();
+		}
 		
 	}
 }
