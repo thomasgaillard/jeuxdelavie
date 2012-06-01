@@ -1,15 +1,18 @@
 package model;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Observer;
 import java.util.Random;
 
 
-public class Modele extends Observable {
+public class Modele implements Observable {
 
 	private boolean enMarche;
 	private int t;
 	private boolean[][] tabBool;
 	private int tailleTab;
+	private ArrayList<Observer> tabObservers;
 
 	public Modele(int n){
 		this.tailleTab=n;
@@ -85,5 +88,22 @@ public class Modele extends Observable {
 	
 	public void activ(){
 		this.enMarche=true;
+	}
+
+	@Override
+	public void addObserver(Observer obs) {
+		tabObservers.add(obs);	
+	}
+
+	@Override
+	public void removeObserver(Observer obs) {
+		tabObservers.remove(obs);
+		
+	}
+
+	@Override
+	public void notifyObserver() {
+		tabObservers.Notify();
+		
 	}
 }
