@@ -7,9 +7,9 @@ import java.util.Random;
 public class Modele extends Observable {
 
 	private boolean enMarche;
-	int t;
-	boolean[][] tabBool;
-	int tailleTab;
+	private int t;
+	private boolean[][] tabBool;
+	private int tailleTab;
 
 	public Modele(int n){
 		this.tailleTab=n;
@@ -18,6 +18,38 @@ public class Modele extends Observable {
 		this.t=5000;
 	}
 	
+	public boolean isEnMarche() {
+		return enMarche;
+	}
+
+	public void setEnMarche(boolean enMarche) {
+		this.enMarche = enMarche;
+	}
+
+	public int getT() {
+		return t;
+	}
+
+	public void setT(int t) {
+		this.t = t;
+	}
+
+	public boolean[][] getTabBool() {
+		return tabBool;
+	}
+
+	public void setTabBool(boolean[][] tabBool) {
+		this.tabBool = tabBool;
+	}
+
+	public int getTailleTab() {
+		return tailleTab;
+	}
+
+	public void setTailleTab(int tailleTab) {
+		this.tailleTab = tailleTab;
+	}
+
 	public void run() {
 		 while(true){
 			 if(enMarche){
