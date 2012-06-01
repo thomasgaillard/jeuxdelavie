@@ -8,13 +8,20 @@ public class Modele extends Observable {
 
 	private boolean enMarche;
 	int t;
-	/**
-	 * @param args
-	 */
+	boolean[][] tabBool;
+	int tailleTab;
+
+	public Modele(int n){
+		this.tailleTab=n;
+		this.tabBool=new boolean[n][n];
+		this.enMarche=false;
+		this.t=5000;
+	}
+	
 	public void run() {
 		 while(true){
 			 if(enMarche){
-				 calcul();
+				 init();
 				 notifyObservers();
 			 }
 			 Thread thread=new Thread();
@@ -27,13 +34,24 @@ public class Modele extends Observable {
 		 }
 	}
 	
-	private void notifyObservers() {
+	public void notifyObservers() {
 		
 	}
 	
-	private boolean calcul() {
-		Random rand=new Random();
-		return rand.nextBoolean();
-		
+	public void init() {
+		for (int i=0;i<this.tailleTab;i++){
+			for (int j=0;i<this.tailleTab;j++){
+				Random rand=new Random();
+				this.tabBool[i][j]=rand.nextBoolean();
+			}
+		}
+	}
+	
+	public void pause(){
+		this.enMarche=false;
+	}
+	
+	public void active(){
+		this.enMarche=true;
 	}
 }
