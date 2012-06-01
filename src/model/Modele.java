@@ -57,7 +57,7 @@ public class Modele implements Observable {
 		 while(true){
 			 if(enMarche){
 				 init();
-				 notifyObservers();
+				 notifyObserver();
 			 }
 			 Thread thread=new Thread();
 			 try {
@@ -67,10 +67,6 @@ public class Modele implements Observable {
 				e.printStackTrace();
 			}
 		 }
-	}
-	
-	public void notifyObservers() {
-		
 	}
 	
 	public void init() {
