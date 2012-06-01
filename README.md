@@ -1,4 +1,6 @@
 ## Jeux de la vie
-Modélisation Objet
-Modèle vue controleur
+ModÃ©lisation Objet
+
+ModÃ¨le vue controleur
+
 Design Pattern Observer
