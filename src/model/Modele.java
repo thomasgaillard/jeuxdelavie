@@ -77,6 +77,7 @@ public class Modele implements Observable {
 				this.tabBool[i][j]=rand.nextBoolean();
 			}
 		}
+		notifyObserver();
 	}
 	
 	public void pause(){

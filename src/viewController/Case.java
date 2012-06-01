@@ -1,7 +1,13 @@
 package viewController;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Insets;
+
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 public class Case extends JPanel {
 	private boolean etatCellule;
@@ -9,6 +15,8 @@ public class Case extends JPanel {
 	public Case() {
 		super();
 		this.etatCellule = false;
+		this.setBackground(Color.WHITE);
+		this.setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 	
 	public Case(boolean etatCellule) {

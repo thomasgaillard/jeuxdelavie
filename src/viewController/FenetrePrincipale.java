@@ -1,6 +1,7 @@
 package viewController;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -41,19 +42,16 @@ public class FenetrePrincipale extends JFrame {
 		Dimension tailleEcran = k.getScreenSize();
 		int hauteurEcran = tailleEcran.height;
 		this.setTitle("Le jeux de la vie");
-		this.setSize(hauteurEcran / 2 + 200, hauteurEcran / 2);
-		this.setResizable(false);
-		this.setVisible(true);
+		setSize(hauteurEcran / 2 + 200, hauteurEcran / 2);
+		setVisible(true);
 
 		//panels
 		panelPrincipal = new JPanel(new BorderLayout());
 		setContentPane(panelPrincipal);
-		panelDroite = new JPanel();
-		panelDroite.setLayout(new GridLayout(3, 1));
-		panelCentre = new JPanel();
+		panelDroite = new JPanel(new GridLayout(3, 1));
+		panelCentre = new JPanel(new GridLayout(n, n));
 		panelPrincipal.add(panelDroite, BorderLayout.EAST);
 		panelPrincipal.add(panelCentre, BorderLayout.CENTER);
-		panelCentre.setLayout(new GridLayout(n, n));
 		
 		//buttons
 		JButton init = new JButton("Initialiser");
@@ -85,7 +83,8 @@ public class FenetrePrincipale extends JFrame {
 				modele.activ();
 			}
 		});
-		
+		this.validate();
+		this.repaint();
 		//demarre le modele
 		modele.run();
 	}
