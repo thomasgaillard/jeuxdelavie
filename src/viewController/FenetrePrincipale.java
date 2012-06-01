@@ -22,7 +22,7 @@ public class FenetrePrincipale extends JFrame {
 		//init
 		n = 25;
 		modele = new Modele(n);
-		//implémentation de l'Observer en class anonyme
+		//implémentation de l'Observer en classe anonyme
 		modele.addObserver(new Observer(){
 			//fonction de notification
 			public void Notify(){
