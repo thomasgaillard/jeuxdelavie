@@ -7,6 +7,8 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,13 +17,16 @@ import javax.swing.JPanel;
 import model.Modele;
 
 public class FenetrePrincipale extends JFrame {
+	
 	private JPanel panelPrincipal, panelCentre, panelDroite;
 	private int n;
+	public static int hauteurEcran;
+	public static int largeurEcran;
 	private Modele modele;
 
 	public FenetrePrincipale() {
 		//init
-		n = 25;
+		n = 50;
 		modele = new Modele(n);
 		//implémentation de l'Observer en classe anonyme
 		modele.addObserver(new Observer(){
@@ -40,15 +45,17 @@ public class FenetrePrincipale extends JFrame {
 		//fenetre
 		Toolkit k = Toolkit.getDefaultToolkit();
 		Dimension tailleEcran = k.getScreenSize();
-		int hauteurEcran = tailleEcran.height;
+		int hauteur = tailleEcran.height;
+		hauteurEcran=hauteur / 2 ;
+		largeurEcran=hauteurEcran/2+ 200;
 		this.setTitle("Le jeux de la vie");
-		setSize(hauteurEcran / 2 + 200, hauteurEcran / 2);
+		setSize(hauteurEcran, largeurEcran);
 		setVisible(true);
 
 		//panels
 		panelPrincipal = new JPanel(new BorderLayout());
 		setContentPane(panelPrincipal);
-		panelDroite = new JPanel(new GridLayout(3, 1));
+		panelDroite = new JPanel(new GridLayout(4, 1));
 		panelCentre = new JPanel(new GridLayout(n, n));
 		panelPrincipal.add(panelDroite, BorderLayout.EAST);
 		panelPrincipal.add(panelCentre, BorderLayout.CENTER);
@@ -60,6 +67,8 @@ public class FenetrePrincipale extends JFrame {
 		panelDroite.add(pause);
 		JButton activ = new JButton("Activité");
 		panelDroite.add(activ);
+		JButton jeu = new JButton("Génération");
+		panelDroite.add(jeu);
 		
 		//cellules
 		for (int i = 0; i < n*n; i++) {
@@ -75,7 +84,12 @@ public class FenetrePrincipale extends JFrame {
 		});
 		pause.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				modele.pause();
+				try {
+					modele.pause();
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		activ.addActionListener(new ActionListener() {
@@ -83,10 +97,13 @@ public class FenetrePrincipale extends JFrame {
 				modele.activ();
 			}
 		});
+		jeu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				modele.update();
+			}
+		});
 		this.validate();
 		this.repaint();
-		//demarre le modele
-		modele.run();
 	}
 
 	public static void main(String[] args) {

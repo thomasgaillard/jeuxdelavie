@@ -12,6 +12,14 @@ import javax.swing.border.Border;
 public class Case extends JPanel {
 	private boolean etatCellule;
 
+	public boolean isEtatCellule() {
+		return etatCellule;
+	}
+
+	public void setEtatCellule(boolean etatCellule) {
+		this.etatCellule = etatCellule;
+	}
+
 	public Case() {
 		super();
 		this.etatCellule = false;
