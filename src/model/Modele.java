@@ -27,7 +27,7 @@ public class Modele implements Observable,Runnable {
 		this.tabBool=new boolean[n][n];
 		this.voisines=new int[n][n];
 		this.enMarche=false;
-		this.t=1000;
+		this.t=5000;
 		this.thread=new Thread(this);
 		this.thread.start();
 	}
@@ -68,18 +68,24 @@ public class Modele implements Observable,Runnable {
 		this.tailleTab = tailleTab;
 	}
 
-	public synchronized void run() {
+	public void run() {
 	
 		 while(true){	
 			 synchronized (thread) {
-				 if(enMarche){
-					 this.init();
-					 //this.update();
+				 if(this.isEnMarche()){
+					 //this.init();
+					 try { 
+						this.update();
+						Thread.sleep(t);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					 this.notifyObserver();
 				 }
 				 else{
 					 try {
-						wait();
+						thread.wait();
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -99,14 +105,16 @@ public class Modele implements Observable,Runnable {
 		this.notifyObserver();
 	}
 	
-	public void pause() throws InterruptedException{
-		thread.wait();
-		this.enMarche=false;
+	public void pause(){
+		this.setEnMarche(false);
+		 
 	}
 	
-	public void activ(){
-		thread.notify();
-		this.enMarche=true;
+	public  void activ(){
+		synchronized (thread) {
+			this.setEnMarche(true);
+			thread.notify();
+		 }
 	}
 
 	public void addObserver(Observer obs) {
@@ -124,7 +132,7 @@ public class Modele implements Observable,Runnable {
 		{
 			for(int xc=x-1;xc<=x+1;xc++)
 			{
-				if ((xc!=x || yc!=y) && xc>=0 && yc>=0 && xc<this.tailleTab && yc<this.tailleTab)
+				if ((xc!=x || yc!=y) && xc>=0 && yc>=0 && xc<this.getTailleTab() && yc<this.getTailleTab())
 				{
 					boolean etatCellule=this.getTabBool()[xc][yc]; //this.getCellule(xc,yc);
 					if (etatCellule)
@@ -186,6 +194,13 @@ public class Modele implements Observable,Runnable {
 		for(Observer tab : tabObservers){
 			tab.Notify();
 		}
-		
+	}
+
+	public void vitessePlus() {
+		this.setT(this.getT()/2);
+	}
+	
+	public void vitesseMoins() {
+		this.setT(this.getT()*2);
 	}
 }
