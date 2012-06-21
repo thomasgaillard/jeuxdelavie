@@ -58,6 +58,7 @@ public class Modele implements Observable,Runnable {
 	
 	public void setTabBool_x_y(int x,int y,boolean bool) {
 		this.tabBool[x][y] = bool;
+		this.notifyObserver();
 	}
 
 	public int getTailleTab() {
@@ -203,4 +204,18 @@ public class Modele implements Observable,Runnable {
 	public void vitesseMoins() {
 		this.setT(this.getT()*2);
 	}
+	
+    public void setForme(int x, int y, int fig){
+        int x1=Forme.FORMES[fig][0][0];
+        int x2=Forme.FORMES[fig][0][1];
+        for(int i=1;i<=x2;i++){
+            for(int j=0;j<x1;j++){
+                if(Forme.FORMES[fig][i][j] == 1){
+                    if((x+i+1)<this.tailleTab && (y+j)<this.tailleTab)
+                        this.setTabBool_x_y(x+i-1,y+j,true);
+                }  
+            }
+        }
+        notifyObserver();
+    }
 }
